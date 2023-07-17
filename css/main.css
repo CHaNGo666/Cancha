@@ -1,0 +1,122 @@
+.cancha{
+    background-image: url("/img/cancha.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 800px;
+    height: 550px;
+    border: 1px solid #000;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+
+.cont-jugador{
+    width: 100px;
+    height: 80px;
+   }
+
+.img-jugadoras{
+    background-image: url("/img/camiseta.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+ margin: auto;
+}
+
+.dato-jugador{
+    position: absolute;
+    bottom: 5px;
+    text-align: center;
+    width: 100px;
+    font-weight: bolder;
+    background-color: #fff;
+}
+
+#arq{
+    position: absolute;
+    top: 200px;
+    left: 5px;;
+
+}
+
+#li{
+    position: absolute;
+    top: 30px;
+    left: 100px;;
+
+}
+
+#ld{
+    position: absolute;
+    top: 350px;
+    left: 100px;;
+
+}
+
+#dci{
+    position: absolute;
+    top: 110px;
+    left: 40px;;
+
+}
+
+#dcd{
+    position: absolute;
+    top: 290px;
+    left: 40px;;
+
+}
+
+
+
+#mi{
+    position: absolute;
+    top: 30px;
+    left: 280px;;
+
+}
+
+#md{
+    position: absolute;
+    top: 350px;
+    left: 290px;;
+
+}
+
+#mci{
+    position: absolute;
+    top: 130px;
+    left: 220px;;
+
+}
+
+#mcd{
+    position: absolute;
+    top: 260px;
+    left: 220px;;
+
+}
+
+#dc{
+    position: absolute;
+    top: 180px;
+    left: 450px;;
+
+}
+
+#mp{
+    position: absolute;
+    top: 250px;
+    left: 400px;;
+
+}
+
+.DivBtn{
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+}
