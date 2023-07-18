@@ -2,7 +2,7 @@
 let timerVar, totalSeconds, timeVarTotal = 0, totalSecondsTotal;
 
 // constantes con nro de columna
-const coltpj = 4, coltpd = 5, colJd = 8;
+const coltpj = 4, coltpd = 5, colhttj = 6, colttj = 7, colhttd = 8, colttd = 9, colJd = 10;
 
 let secondsT = 0;
 
@@ -95,23 +95,36 @@ stop_timer.addEventListener('click', e => {
 // IMPRIME TIEMPOS EN PANTALLA
 function datosParciales() {
     console.log("PARCIALES")
+    let totalJugadoXjugador = 0;
     //nodo de tabla
     const parcial = localStorage.getItem("tiempoParcial");
     //nodo tr
     const tr = document.getElementById("listaJugadores").querySelectorAll("#listaJugadores tbody tr");
 
-
-    console.log(tr)
+   // console.log(tr)
+ 
     // recorre tr
     for (let i = 0; i < tr.length; i++) {
-
-        console.log("tr --> ", tr[i].children[8].textContent)
         // asigna parciales
         if (tr[i].children[colJd].textContent === "J") {
+            // suma tiempo total acumulado de juego + parcial ==> tiempo total de cada jugador 
+            totalJugadoXjugador = parseInt(tr[i].children[colhttj].textContent) + parseInt(parcial);
+            let tiempo = calculaTime(totalJugadoXjugador)
+            // parcial
             tr[i].children[coltpj].textContent = parcial;
+            // imprime total
+            tr[i].children[colhttj].textContent = totalJugadoXjugador;
+            tr[i].children[colttj].textContent = formateoTime(tiempo[0], tiempo[1], tiempo[2]);
         }
         else {
+            // suma tiempo total acumulado de descanso + parcial ==> tiempo total de cada jugador 
+            totalJugadoXjugador = parseInt(tr[i].children[colhttd].textContent) + parseInt(parcial);
+            let tiempo = calculaTime(totalJugadoXjugador)
+            // parcial
             tr[i].children[coltpd].textContent = parcial;
+            // imprime total
+            tr[i].children[colhttd].textContent = totalJugadoXjugador;
+            tr[i].children[colttd].textContent = formateoTime(tiempo[0], tiempo[1], tiempo[2]);
         }
     }
     // J/D

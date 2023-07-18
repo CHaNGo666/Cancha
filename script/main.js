@@ -1,5 +1,7 @@
+
 // FUNCION ALTA JUGADORES
 //-------------------------------------------------------------------------------------------------------
+//  ++++ >>>>   LAS CONSTANTES ESTAN EN CLOCK.js
 // VERDE --> class="success"
 // ROJO --> class="danger"
 function altaJugador(a) {
@@ -20,7 +22,7 @@ function altaJugador(a) {
         // Pone nombre a icono de cancha
         document.getElementById(posicion).children[1].textContent = apellido;
         // J/D
-        document.getElementById(a).children[8].textContent = "J";
+        document.getElementById(a).children[colJd].textContent = "J";
         // da color al TR
         document.getElementById(a).classList.add('success');
         document.getElementById(idSpanBtn).classList.remove('glyphicon-save');
@@ -55,7 +57,7 @@ window.addEventListener('load', function () {
         x += "<option value=\"li\">LI</option><option value=\"dcd\">DCD</option>";
         x += "<option value=\"dci\">DCI</option><option value=\"md\">MD</option><option value=\"mi\">MI</option><option value=\"mcd\">MCD</option><option value=\"mci\">MCI</option>";
         x += "<option value=\"mp\">MP</option><option value=\"dc\">DC</option></select></td>";
-        x += "<td></td><td></td><td></td><td></td><td>D</td>";
+        x += "<td>0</td><td>0</td><td class=\"hidden\">0</td><td>0</td><td class=\"hidden\">0</td><td>0</td><td>D</td>";
         x += "<td><button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\"onclick=\"altaJugador('" + i + "')\">";
         x += "<span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\" id=\"spanBtn"+i+"\" ></span></button></td></tr>";
 
