@@ -1,77 +1,100 @@
 
-let timerVar, totalSeconds, timeVarTotal, totalSecondsTotal;
+let timerVar, totalSeconds, timeVarTotal = 0, totalSecondsTotal;
+
+// constantes con nro de columna
 const coltpj = 4, coltpd = 5, colJd = 8;
 
-// tiempo parcial
-function countTimer() {
-    ++totalSeconds;
-    var hour = Math.floor(totalSeconds / 3600);
-    var minute = Math.floor((totalSeconds - hour * 3600) / 60);
-    var seconds = totalSeconds - (hour * 3600 + minute * 60);
-    if (hour < 10)
-        hour = "0" + hour;
-    if (minute < 10)
-        minute = "0" + minute;
-    if (seconds < 10)
-        seconds = "0" + seconds;
-    document.getElementById("timer").innerHTML = hour + ":" + minute + ":" + seconds;
+let secondsT = 0;
+
+//------------------------------------------------------------------------------------------
+// RELOJ
+function timerClock() {
+    ++secondsT;
+    // tiempo total
+    let x = parseInt(localStorage.getItem("tiempoTotal") == null ? 0 : localStorage.getItem("tiempoTotal"));
+    // calcula tiempo parcial
+    let tiempo = calculaTime(secondsT)
+    // imprime pantalla
+    document.getElementById("timer").innerHTML = formateoTime(tiempo[0], tiempo[1], tiempo[2]);
+    // suma tiempo totalanterior + parcial => tiempo total actual
+    let tt = (x + secondsT);
+    // calcula tiempo total
+    tiempo = calculaTime(tt)
+    // imprime pantalla
+    document.getElementById("timerTotal").innerHTML = formateoTime(tiempo[0], tiempo[1], tiempo[2]);
+}
+//------------------------------------------------------------------------------------------
+// calcula tiempo
+const calculaTime = (secondsT) => {
+
+    let hour = Math.floor(secondsT / 3600);
+    let minute = Math.floor((secondsT - hour * 3600) / 60);
+    let seconds = secondsT - (hour * 3600 + minute * 60);
+
+    const t = [hour, minute, seconds];
+
+    return t;
 
 }
-// tiempo total
-function countTimerTotal() {
-    ++totalSecondsTotal;
-    var hour = Math.floor(totalSecondsTotal / 3600);
-    var minute = Math.floor((totalSecondsTotal - hour * 3600) / 60);
-    var seconds = totalSecondsTotal - (hour * 3600 + minute * 60);
-    if (hour < 10)
-        hour = "0" + hour;
-    if (minute < 10)
-        minute = "0" + minute;
-    if (seconds < 10)
-        seconds = "0" + seconds;
-    document.getElementById("timerTotal").innerHTML = hour + ":" + minute + ":" + seconds;
+
+
+//------------------------------------------------------------------------------------------
+// FORMATEA TIEMPO
+const formateoTime = (h, m, s) => {
+
+    if (h < 10)
+        h = "0" + h;
+    if (m < 10)
+        m = "0" + m;
+    if (s < 10)
+        s = "0" + s;
+
+    return (h + ":" + m + ":" + s);
+
 }
 
-
-
+//------------------------------------------------------------------------------------------
 // COMIENZO
 start_timer.addEventListener('click', e => {
 
     console.log("start")
 
-    timerVar = setInterval(countTimer, 1000);
-    totalSeconds = 0;
-
-    timerVarTotal = setInterval(countTimerTotal, 1000);
+    timerVar = setInterval(timerClock, 1000);
     totalSecondsTotal = localStorage.getItem("tiempoTotal");
     console.log(totalSecondsTotal)
 
 });
 
-
+//------------------------------------------------------------------------------------------
 // PAUSA
 pause_timer.addEventListener('click', e => {
 
-    localStorage.setItem("tiempoTotal", totalSecondsTotal);
-    localStorage.setItem("tiempoParcial", totalSeconds);
+    console.log("pausa")
+    timeVarTotal = timeVarTotal + secondsT;
+    localStorage.setItem("tiempoTotal", timeVarTotal);
+    localStorage.setItem("tiempoParcial", secondsT);
+    secondsT = 0;
+
     datosParciales()
     clearInterval(timerVar)
-    clearInterval(timerVarTotal)
+
+    document.getElementById("timer").innerHTML = ("00:00:0");
 
 });
 
+//------------------------------------------------------------------------------------------
 // DETENCION
 stop_timer.addEventListener('click', e => {
 
     localStorage.clear("tiempoTotal");
     clearInterval(timerVar)
-    clearInterval(timerVarTotal)
 
 });
 
+//------------------------------------------------------------------------------------------
 // IMPRIME TIEMPOS EN PANTALLA
 function datosParciales() {
-
+    console.log("PARCIALES")
     //nodo de tabla
     const parcial = localStorage.getItem("tiempoParcial");
     //nodo tr
